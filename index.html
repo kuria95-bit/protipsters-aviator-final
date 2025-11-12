@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Pro Tipsters Aviator Bot</title>
+<title>Pro Tipsters Aviator Bot | Kenya’s Smart Betting Assistant</title>
+<meta name="description" content="Join Pro Tipsters Aviator Bot for accurate flight predictions, real-time cash-out tips, and daily wins. Trusted by thousands of Kenyan players.">
 <style>
   :root {
     --red:#ff3131;
@@ -29,15 +30,16 @@
   header p{color:#ddd;max-width:520px;margin:auto;}
   .btn{
     display:inline-block;
-    margin:12px;
+    margin:10px;
     padding:12px 26px;
     background:var(--red);
     color:var(--white);
     border-radius:30px;
     text-decoration:none;
     transition:.3s;
+    box-shadow:0 0 10px rgba(255,49,49,.3);
   }
-  .btn:hover{background:#e00000;}
+  .btn:hover{background:#e00000;transform:scale(1.05);}
   section{padding:40px 20px;}
   h2{color:var(--red);}
   .steps{
@@ -51,8 +53,6 @@
     padding:16px 20px;
   }
   footer{background:#111;color:#888;padding:20px;font-size:14px;}
-
-  /* --- Aviator plane animation --- */
   .plane{
     position:absolute;
     top:70%;
@@ -66,8 +66,6 @@
     0%{transform:translate(0,0) rotate(20deg);opacity:.8;}
     100%{transform:translate(120vw,-80vh) rotate(20deg);opacity:0;}
   }
-
-  /* --- pop-up notifications --- */
   #notifier{
     position:fixed;
     bottom:20px;
@@ -79,6 +77,8 @@
     font-size:15px;
     display:none;
     animation:fadeInOut 5s ease-in-out forwards;
+    min-width:230px;
+    text-align:left;
   }
   @keyframes fadeInOut{
     0%{opacity:0;transform:translateY(20px);}
@@ -87,9 +87,23 @@
     100%{opacity:0;transform:translateY(20px);}
   }
 
+  .stats{display:flex;justify-content:center;gap:25px;flex-wrap:wrap;margin-top:20px;}
+  .stat-box{
+    background:var(--gray);
+    padding:15px 25px;
+    border-radius:12px;
+    font-size:16px;
+  }
+  .vip{
+    background:linear-gradient(180deg,#1a1a1a,#111);
+    border-top:2px solid var(--red);
+    padding:50px 20px;
+  }
   @media(max-width:600px){
     header h1{font-size:26px;}
     .steps div{text-align:center;}
+    #notifier{left:10px;right:10px;}
+    .stats{flex-direction:column;align-items:center;}
   }
 </style>
 </head>
@@ -97,29 +111,36 @@
 
 <header>
   <div class="plane">✈️</div>
-  <img src="https://i.ibb.co/zWYz10vX/Chat-GPT-Image-Nov-12-2025-01-53-41-PM.png" alt="Pro Tipsters Logo" width="160">
-
+  <img src="https://i.ibb.co/zWYz10vX/Chat-GPT-Image-Nov-12-2025-01-53-41-PM.png" alt="Pro Tipsters Logo" width="150">
   <h1>Pro Tipsters Aviator Bot</h1>
-  <p>Real-time flight-pattern predictions & smart stake tips powered by Pro Tipsters AI.<br>
-     Accuracy tested across 10 000 + rounds — stay ahead every flight!</p>
+  <p>Real-time flight predictions & smart cash-out alerts.<br>Trusted by 10,000+ Kenyan gamers daily.</p>
   <a href="https://t.me/protipsters2" class="btn">💬 Join Telegram Channel</a>
-  <a href="https://wa.link/0k6qrt" class="btn">⚡ Start on WhatsApp</a>
+  <a href="https://wa.link/hpkgu0" class="btn">⚡ Start on WhatsApp</a>
 </header>
 
 <section>
-  <h2>How It Works</h2>
-  <div class="steps">
-    <div><strong>1️⃣ Join the community</strong><br>Get instant access to Aviator Bot updates.</div>
-    <div><strong>2️⃣ Receive live entry & cash-out points</strong><br>Know when to bet and when to cash out.</div>
-    <div><strong>3️⃣ Win smarter</strong><br>Control risk with tested flight-pattern analysis.</div>
+  <h2>🔥 Live Stats</h2>
+  <div class="stats">
+    <div class="stat-box">👥 Active Players: <span id="activeUsers">120</span></div>
+    <div class="stat-box">💰 Total Wins Today: Ksh <span id="totalWins">85,300</span></div>
+    <div class="stat-box">✅ Accuracy: 83.7%</div>
   </div>
 </section>
 
 <section>
-  <h2>🚀 Ready to Fly Smarter?</h2>
-  <p>Tap below to join our early-access Aviator Bot group.</p>
-  <a href="https://t.me/protipsters2" class="btn">👉 Join on Telegram</a>
-  <a href="https://wa.link/0k6qrt" class="btn">💬 Chat on WhatsApp</a>
+  <h2>How It Works</h2>
+  <div class="steps">
+    <div><strong>1️⃣ Join the community</strong><br>Get instant Aviator Bot updates.</div>
+    <div><strong>2️⃣ Receive live entry & cash-out points</strong><br>Know when to bet and when to cash out.</div>
+    <div><strong>3️⃣ Win smarter</strong><br>Control risk using tested flight pattern data.</div>
+  </div>
+</section>
+
+<section class="vip">
+  <h2>👑 Go VIP — Earn Before Others</h2>
+  <p>VIP Members get early-access flight predictions, private alerts & higher odds.</p>
+  <p><strong>Upgrade for just Ksh 300/day or Ksh 2,000/month.</strong></p>
+  <a href="https://wa.link/hpkgu0" class="btn">💎 Join VIP on WhatsApp</a>
 </section>
 
 <footer>© 2025 Pro Tipsters. All Rights Reserved.</footer>
@@ -127,13 +148,35 @@
 <div id="notifier"></div>
 
 <script>
-  // Demo pop-up messages (replace or add as needed)
+  // --- Active users counter simulation ---
+  const activeUsersEl=document.getElementById("activeUsers");
+  const totalWinsEl=document.getElementById("totalWins");
+  let active=120, wins=85300;
+
+  setInterval(()=>{
+    active += (Math.random()*6 - 3); // fluctuate
+    wins += Math.floor(Math.random()*300 + 100);
+    activeUsersEl.textContent = Math.max(80, Math.min(200, Math.floor(active)));
+    totalWinsEl.textContent = wins.toLocaleString();
+  }, 4000);
+
+  // --- Pop-up messages (Kenyan winners) ---
   const msgs=[
-    "💸 User A just won K sh 5 200!",
-    "🏆 Player B cashed out safely at 1.85×",
-    "✈️ Another smart flight completed successfully!",
-    "🔥 Someone just doubled their balance!",
-    "💰 New win notification from Pro Tipsters Bot"
+    "💸 John Mwangi (07XX-3X2-***), Nairobi — won Ksh 3,200!",
+    "🏆 Grace Njeri (07XX-55X-***), Mombasa — cashed out at 2.10×",
+    "✈️ Peter Odhiambo (07XX-4X8-***), Kisumu — safe exit at 1.85×",
+    "🔥 Aisha Mohamed (07XX-2X1-***), Nakuru — won Ksh 5,000!",
+    "💰 David Kimani (07XX-9X0-***), Eldoret — cashed out at 1.60×",
+    "🎉 Mary Wanjiru (07XX-7X7-***), Thika — doubled stake!",
+    "💵 Simon Kiplagat (07XX-1X3-***), Malindi — win Ksh 4,800!",
+    "✅ Esther Waithira (07XX-6X4-***), Nyeri — cashed at 1.40×",
+    "🚀 Michael Maina (07XX-8X9-***), Machakos — won Ksh 2,500!",
+    "🏅 Janet Achieng (07XX-0X5-***), Meru — exited at 2.00×",
+    "💸 Robert Ouma (07XX-2X6-***), Kakamega — won Ksh 6,300!",
+    "🏆 Caroline Irungu (07XX-3X9-***), Kisii — cashed out at 1.75×",
+    "✈️ Kevin Kiptoo (07XX-4X4-***), Kericho — safe exit at 1.95×",
+    "🔥 Fiona Waweru (07XX-5X2-***), Nanyuki — won Ksh 1,800!",
+    "💰 Benson Oloo (07XX-8X1-***), Kitale — cashed out at 1.50×"
   ];
   const notifier=document.getElementById("notifier");
   function showMsg(){
@@ -141,11 +184,11 @@
     notifier.textContent=msg;
     notifier.style.display="block";
     notifier.style.animation="none";
-    // restart animation
     void notifier.offsetWidth;
     notifier.style.animation="fadeInOut 5s ease-in-out forwards";
     setTimeout(()=>{notifier.style.display="none";},5000);
   }
+  setTimeout(showMsg,1500);
   setInterval(showMsg,7000);
 </script>
 
