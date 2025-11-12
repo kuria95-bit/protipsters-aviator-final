@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Pro Tipsters Aviator Bot</title>
+<style>
+  :root {
+    --red:#ff3131;
+    --black:#0b0b0b;
+    --gray:#222;
+    --white:#fff;
+  }
+  body{
+    margin:0;
+    font-family:Poppins,Arial,sans-serif;
+    background:var(--black);
+    color:var(--white);
+    text-align:center;
+    overflow-x:hidden;
+  }
+  header{
+    position:relative;
+    overflow:hidden;
+    padding:60px 20px 100px;
+    background:linear-gradient(180deg,#111,#1a1a1a);
+  }
+  header h1{color:var(--red);font-size:32px;margin:10px 0;}
+  header p{color:#ddd;max-width:520px;margin:auto;}
+  .btn{
+    display:inline-block;
+    margin:12px;
+    padding:12px 26px;
+    background:var(--red);
+    color:var(--white);
+    border-radius:30px;
+    text-decoration:none;
+    transition:.3s;
+  }
+  .btn:hover{background:#e00000;}
+  section{padding:40px 20px;}
+  h2{color:var(--red);}
+  .steps{
+    max-width:600px;margin:auto;
+    display:flex;flex-direction:column;gap:20px;text-align:left;
+  }
+  .steps div{
+    background:var(--gray);
+    border-left:4px solid var(--red);
+    border-radius:10px;
+    padding:16px 20px;
+  }
+  footer{background:#111;color:#888;padding:20px;font-size:14px;}
+
+  /* --- Aviator plane animation --- */
+  .plane{
+    position:absolute;
+    top:70%;
+    left:-10%;
+    font-size:48px;
+    color:var(--red);
+    opacity:.8;
+    animation:fly 10s linear infinite;
+  }
+  @keyframes fly{
+    0%{transform:translate(0,0) rotate(20deg);opacity:.8;}
+    100%{transform:translate(120vw,-80vh) rotate(20deg);opacity:0;}
+  }
+
+  /* --- pop-up notifications --- */
+  #notifier{
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    background:rgba(17,17,17,.9);
+    border:1px solid var(--red);
+    border-radius:10px;
+    padding:10px 16px;
+    font-size:15px;
+    display:none;
+    animation:fadeInOut 5s ease-in-out forwards;
+  }
+  @keyframes fadeInOut{
+    0%{opacity:0;transform:translateY(20px);}
+    10%{opacity:1;transform:translateY(0);}
+    90%{opacity:1;}
+    100%{opacity:0;transform:translateY(20px);}
+  }
+
+  @media(max-width:600px){
+    header h1{font-size:26px;}
+    .steps div{text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="plane">✈️</div>
+  <img src="https://i.ibb.co/zWYz10vX/Chat-GPT-Image-Nov-12-2025-01-53-41-PM.png" alt="Pro Tipsters Logo" width="160">
+
+  <h1>Pro Tipsters Aviator Bot</h1>
+  <p>Real-time flight-pattern predictions & smart stake tips powered by Pro Tipsters AI.<br>
+     Accuracy tested across 10 000 + rounds — stay ahead every flight!</p>
+  <a href="https://t.me/protipsters2" class="btn">💬 Join Telegram Channel</a>
+  <a href="https://wa.link/0k6qrt" class="btn">⚡ Start on WhatsApp</a>
+</header>
+
+<section>
+  <h2>How It Works</h2>
+  <div class="steps">
+    <div><strong>1️⃣ Join the community</strong><br>Get instant access to Aviator Bot updates.</div>
+    <div><strong>2️⃣ Receive live entry & cash-out points</strong><br>Know when to bet and when to cash out.</div>
+    <div><strong>3️⃣ Win smarter</strong><br>Control risk with tested flight-pattern analysis.</div>
+  </div>
+</section>
+
+<section>
+  <h2>🚀 Ready to Fly Smarter?</h2>
+  <p>Tap below to join our early-access Aviator Bot group.</p>
+  <a href="https://t.me/protipsters2" class="btn">👉 Join on Telegram</a>
+  <a href="https://wa.link/0k6qrt" class="btn">💬 Chat on WhatsApp</a>
+</section>
+
+<footer>© 2025 Pro Tipsters. All Rights Reserved.</footer>
+
+<div id="notifier"></div>
+
+<script>
+  // Demo pop-up messages (replace or add as needed)
+  const msgs=[
+    "💸 User A just won K sh 5 200!",
+    "🏆 Player B cashed out safely at 1.85×",
+    "✈️ Another smart flight completed successfully!",
+    "🔥 Someone just doubled their balance!",
+    "💰 New win notification from Pro Tipsters Bot"
+  ];
+  const notifier=document.getElementById("notifier");
+  function showMsg(){
+    const msg=msgs[Math.floor(Math.random()*msgs.length)];
+    notifier.textContent=msg;
+    notifier.style.display="block";
+    notifier.style.animation="none";
+    // restart animation
+    void notifier.offsetWidth;
+    notifier.style.animation="fadeInOut 5s ease-in-out forwards";
+    setTimeout(()=>{notifier.style.display="none";},5000);
+  }
+  setInterval(showMsg,7000);
+</script>
+
+</body>
+</html>
