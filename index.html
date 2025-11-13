@@ -86,7 +86,6 @@
     90%{opacity:1;}
     100%{opacity:0;transform:translateY(20px);}
   }
-
   .stats{display:flex;justify-content:center;gap:25px;flex-wrap:wrap;margin-top:20px;}
   .stat-box{
     background:var(--gray);
@@ -143,24 +142,29 @@
   <a href="https://wa.link/hpkgu0" class="btn">💎 Join VIP on WhatsApp</a>
 </section>
 
+<!-- New Join Our Bot Section -->
+<section>
+  <h2>🚀 Ready to Win Smarter?</h2>
+  <p>Join our official Aviator Bot for real-time predictions and cash-out alerts directly from Pro Tipsters.</p>
+  <a href="https://protipsters-8sxzqjypp-pauls-projects-595440e1.vercel.app/" class="btn">🤖 Join Our Bot</a>
+</section>
+
 <footer>© 2025 Pro Tipsters. All Rights Reserved.</footer>
 
 <div id="notifier"></div>
 
 <script>
-  // --- Active users counter simulation ---
   const activeUsersEl=document.getElementById("activeUsers");
   const totalWinsEl=document.getElementById("totalWins");
   let active=120, wins=85300;
 
   setInterval(()=>{
-    active += (Math.random()*6 - 3); // fluctuate
+    active += (Math.random()*6 - 3);
     wins += Math.floor(Math.random()*300 + 100);
     activeUsersEl.textContent = Math.max(80, Math.min(200, Math.floor(active)));
     totalWinsEl.textContent = wins.toLocaleString();
   }, 4000);
 
-  // --- Pop-up messages (Kenyan winners) ---
   const msgs=[
     "💸 John Mwangi (07XX-3X2-***), Nairobi — won Ksh 3,200!",
     "🏆 Grace Njeri (07XX-55X-***), Mombasa — cashed out at 2.10×",
